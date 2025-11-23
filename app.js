@@ -32,10 +32,15 @@ class HabitTracker {
             detailsStreak: document.getElementById('details-streak'),
             habitTimeInput: document.getElementById('habit-time'),
             notificationToggle: document.getElementById('notification-toggle'),
+            notificationToggle: document.getElementById('notification-toggle'),
             // Delete Modal
             deleteModal: document.getElementById('delete-modal'),
             cancelDeleteBtn: document.getElementById('cancel-delete-btn'),
-            confirmDeleteBtn: document.getElementById('confirm-delete-btn')
+            confirmDeleteBtn: document.getElementById('confirm-delete-btn'),
+            // Changelog
+            changelogBtn: document.getElementById('changelog-btn'),
+            changelogModal: document.getElementById('changelog-modal'),
+            closeChangelogBtn: document.getElementById('close-changelog-btn')
         };
     }
 
@@ -61,6 +66,13 @@ class HabitTracker {
         this.dom.confirmDeleteBtn.addEventListener('click', () => this.confirmDelete());
         this.dom.deleteModal.addEventListener('click', (e) => {
             if (e.target === this.dom.deleteModal) this.closeDeleteModal();
+        });
+
+        // Changelog Events
+        this.dom.changelogBtn.addEventListener('click', () => this.openChangelog());
+        this.dom.closeChangelogBtn.addEventListener('click', () => this.closeChangelog());
+        this.dom.changelogModal.addEventListener('click', (e) => {
+            if (e.target === this.dom.changelogModal) this.closeChangelog();
         });
     }
 
@@ -189,6 +201,14 @@ class HabitTracker {
                 }
             }
         }
+    }
+
+    openChangelog() {
+        this.dom.changelogModal.classList.remove('hidden');
+    }
+
+    closeChangelog() {
+        this.dom.changelogModal.classList.add('hidden');
     }
 
     confirmDelete() {
