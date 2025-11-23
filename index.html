@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="header-content">
+                <h1 class="app-title">Habits</h1>
+                <button id="add-habit-btn" class="icon-btn" aria-label="Add Habit">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+            <div class="date-display">
+                <span id="current-date">Today</span>
+            </div>
+        </header>
+
+        <main class="habits-grid" id="habits-container">
+            <!-- Habits will be injected here -->
+        </main>
+    </div>
+
+    <!-- Add Habit Modal -->
+    <div id="add-habit-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>New Habit</h2>
+                <button id="close-modal-btn" class="text-btn">Cancel</button>
+            </div>
+            <form id="add-habit-form">
+                <div class="form-group">
+                    <input type="text" id="habit-name" placeholder="Name" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label>Color</label>
+                    <div class="color-picker">
+                        <input type="radio" name="habit-color" value="blue" id="color-blue" checked>
+                        <label for="color-blue" class="color-swatch blue"></label>
+
+                        <input type="radio" name="habit-color" value="red" id="color-red">
+                        <label for="color-red" class="color-swatch red"></label>
+
+                        <input type="radio" name="habit-color" value="green" id="color-green">
+                        <label for="color-green" class="color-swatch green"></label>
+
+                        <input type="radio" name="habit-color" value="orange" id="color-orange">
+                        <label for="color-orange" class="color-swatch orange"></label>
+
+                        <input type="radio" name="habit-color" value="purple" id="color-purple">
+                        <label for="color-purple" class="color-swatch purple"></label>
+                    </div>
+                </div>
+                <button type="submit" class="primary-btn">Add</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="modal hidden">
+        <div class="modal-content delete-modal-content">
+            <div class="modal-header">
+                <h2>Delete Habit?</h2>
+            </div>
+            <p class="modal-body-text">This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button id="cancel-delete-btn" class="secondary-btn">Cancel</button>
+                <button id="confirm-delete-btn" class="danger-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
