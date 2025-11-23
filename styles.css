@@ -54,13 +54,7 @@ body {
     /* Smooth theme transition */
 }
 
-.app-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    padding-bottom: 100px;
-    /* Space for scrolling */
-}
+/* .app-container is now defined below with flex: 1 */
 
 /* Header */
 .main-header {
@@ -482,6 +476,7 @@ body {
 }
 
 /* Footer */
+/* Footer */
 .main-footer {
     text-align: center;
     padding: 24px 0;
@@ -495,13 +490,30 @@ body {
     background-color: var(--bg-color);
     /* Default to bg color */
     margin-top: auto;
-    /* Push to bottom if using flex column on body */
+    /* Push to bottom */
+    border-top: 1px solid var(--border-color);
+    /* Always show border for visibility */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.app-container {
+    flex: 1;
+    /* Expand to fill available space */
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-bottom: 40px;
 }
 
 body.dark-mode .main-footer {
     background-color: #1c1c1e;
     /* Slightly lighter than #121212 */
-    border-top: 1px solid var(--border-color);
 }
 
 /* Empty State */
