@@ -335,6 +335,104 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Details Modal Inputs */
+.details-group {
+    margin-bottom: 24px;
+}
+
+.details-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* iOS Style Time Input */
+.time-input-container {
+    position: relative;
+    display: inline-block;
+}
+
+.time-input {
+    appearance: none;
+    -webkit-appearance: none;
+    background: var(--bg-color);
+    border: none;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-family: var(--font-family);
+    font-size: 17px;
+    color: var(--accent-blue);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.time-input:focus {
+    outline: none;
+    background: rgba(0, 122, 255, 0.1);
+}
+
+/* iOS Style Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 51px;
+    height: 31px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #e9e9ea;
+    transition: .4s;
+    border-radius: 31px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 27px;
+    width: 27px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input:checked+.slider {
+    background-color: var(--accent-green);
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+/* Dark Mode Overrides for Inputs */
+body.dark-mode .slider {
+    background-color: #39393d;
+}
+
+body.dark-mode .time-input {
+    background: #2c2c2e;
+    color: var(--accent-blue);
+}
+
 .form-group input[type="text"]:focus {
     border-color: var(--accent-blue);
 }

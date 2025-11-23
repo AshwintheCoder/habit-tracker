@@ -1,16 +1,29 @@
 class HabitTracker {
     constructor() {
         this.habits = JSON.parse(localStorage.getItem('habits')) || [];
+        this.currentDetailHabitId = null;
+        this.lastNotifiedMinute = null;
         this.theme = localStorage.getItem('theme') || 'light';
-        this.init();
+        this.cacheDOM();
+        this.bindEvents();
+        this.renderHabits();
+        this.renderDate();
+        this.applyTheme();
+
+        // Start notification poller (check every 10 seconds)
+        setInterval(() => this.checkNotifications(), 10000);
+
+        // Request permission immediately if any habit has notifications on
+        if (this.habits.some(h => h.notifications)) {
+            if ("Notification" in window && Notification.permission === "default") {
+                Notification.requestPermission();
+            }
+        }
     }
 
     init() {
-        this.cacheDOM();
-        this.applyTheme(); // Apply theme after DOM is cached to update icons
-        this.bindEvents();
-        this.renderDate();
-        this.renderHabits();
+        // This method is now empty as its functionality has been moved to the constructor.
+        // The original comment "Apply theme after DOM is cached to update icons" is no longer relevant here.
     }
 
     cacheDOM() {
@@ -201,6 +214,37 @@ class HabitTracker {
                 }
             }
         }
+    }
+
+    checkNotifications() {
+        if (!("Notification" in window) || Notification.permission !== "granted") return;
+
+        const now = new Date();
+        const currentMinute = now.getMinutes();
+
+        // Only check once per minute
+        if (this.lastNotifiedMinute === currentMinute) return;
+
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const currentTimeString = `${hours}:${minutes}`;
+
+        this.habits.forEach(habit => {
+            if (habit.notifications && habit.time === currentTimeString) {
+                this.sendNotification(habit.name);
+            }
+        });
+
+        this.lastNotifiedMinute = currentMinute;
+    }
+
+    sendNotification(habitName) {
+        const notification = new Notification("Habit Reminder", {
+            body: `Time to complete your habit: ${habitName}`,
+            icon: "favicon.ico" // Optional: Add an icon if you have one
+        });
+
+        // Play a subtle sound if desired (optional, browser policy might block)
     }
 
     openChangelog() {
