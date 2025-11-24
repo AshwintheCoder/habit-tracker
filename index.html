@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habit Tracker - Track Your Daily Goals & Build Streaks</title>
+<meta name="description"
+    content="A beautiful, Apple-style habit tracker to help you build better habits and maintain streaks. Free, private, and runs entirely in your browser.">
+<link rel="canonical" href="https://ashwintheCoder.github.io/habit-tracker/">
+<link rel="stylesheet" href="styles.css?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="header-content">
+                <h1 class="app-title">Habits</h1>
+                <div style="display: flex; gap: 12px;">
+                    <button id="theme-toggle-btn" class="icon-btn" aria-label="Toggle Theme">
+                        <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <svg class="moon-icon hidden" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </button>
+                    <button id="add-habit-btn" class="icon-btn" aria-label="Add Habit">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="date-display">
+                <span id="current-date">Today</span>
+            </div>
+        </header>
+
+        <main class="habits-grid" id="habits-container">
+            <!-- Habits will be injected here -->
+        </main>
+    </div>
+
+    <!-- Add Habit Modal -->
+    <div id="add-habit-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>New Habit</h2>
+                <button id="close-modal-btn" class="text-btn">Cancel</button>
+            </div>
+            <form id="add-habit-form">
+                <div class="form-group">
+                    <input type="text" id="habit-name" placeholder="Name" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label>Color</label>
+                    <div class="color-picker">
+                        <input type="radio" name="habit-color" value="blue" id="color-blue" checked>
+                        <label for="color-blue" class="color-swatch blue"></label>
+
+                        <input type="radio" name="habit-color" value="red" id="color-red">
+                        <label for="color-red" class="color-swatch red"></label>
+
+                        <input type="radio" name="habit-color" value="green" id="color-green">
+                        <label for="color-green" class="color-swatch green"></label>
+
+                        <input type="radio" name="habit-color" value="orange" id="color-orange">
+                        <label for="color-orange" class="color-swatch orange"></label>
+
+                        <input type="radio" name="habit-color" value="purple" id="color-purple">
+                        <label for="color-purple" class="color-swatch purple"></label>
+
+                        <input type="radio" name="habit-color" value="indigo" id="color-indigo">
+                        <label for="color-indigo" class="color-swatch indigo"></label>
+
+                        <input type="radio" name="habit-color" value="teal" id="color-teal">
+                        <label for="color-teal" class="color-swatch teal"></label>
+                    </div>
+                </div>
+                <button type="submit" class="primary-btn">Add</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Habit Details Modal -->
+    <div id="habit-details-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Habit Details</h2>
+                <button id="close-details-btn" class="text-btn">Done</button>
+            </div>
+            <div id="habit-details-body">
+                <div class="form-group">
+                    <label>Habit Name</label>
+                    <p id="details-habit-name" class="details-text"></p>
+                </div>
+
+                <div class="form-group">
+                    <label>Streak</label>
+                    <p id="details-streak" class="details-text"></p>
+                </div>
+
+                <div class="details-group">
+                    <label>Time</label>
+                    <input type="time" id="habit-time" class="time-input">
+                </div>
+
+                <div class="details-group">
+                    <label>Notifications</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="notification-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                </label>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="modal hidden">
+        <div class="modal-content delete-modal-content">
+            <div class="modal-header">
+                <h2>Delete Habit?</h2>
+            </div>
+            <p class="modal-body-text">This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button id="cancel-delete-btn" class="secondary-btn">Cancel</button>
+                <button id="confirm-delete-btn" class="danger-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Changelog Modal -->
+    <div id="changelog-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>What's New</h2>
+                <button id="close-changelog-btn" class="text-btn">Done</button>
+            </div>
+            <div class="changelog-list">
+                <div class="changelog-item">
+                    <div class="version-tag">v1.2</div>
+                    <h3>Habit Details & Polish</h3>
+                    <ul>
+                        <li>Added detailed view for habits</li>
+                        <li>Set reminders and toggle notifications</li>
+                        <li>Improved dark mode visibility</li>
+                        <li>Fixed text overflow issues</li>
+                    </ul>
+                </div>
+                <div class="changelog-item">
+                    <div class="version-tag">v1.1</div>
+                    <h3>Advanced Features</h3>
+                    <ul>
+                        <li>Dark Mode support</li>
+                        <li>Edit existing habits</li>
+                        <li>Weekly history view</li>
+                        <li>Custom delete confirmation</li>
+                    </ul>
+                </div>
+                <div class="changelog-item">
+                    <div class="version-tag">v1.0</div>
+                    <h3>Initial Release</h3>
+                    <ul>
+                        <li>Create and track habits</li>
+                        <li>Streak calculation</li>
+                        <li>Confetti animations</li>
+                        <li>Local storage persistence</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>Habit Tracker &copy; 2025</p>
+        <button id="changelog-btn" class="text-btn small">Changelog</button>
+    </footer>
+
+    <script src="app.js?v=2"></script>
+</body>
+
+</html>
